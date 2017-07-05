@@ -1,0 +1,11 @@
+FROM alpine:latest
+RUN apk update && \
+    apk upgrade && \
+    apk add --update --no-cache curl alpine-sdk ghc=8.0.2-r6 zlib-dev
+RUN curl -sSL https://get.haskellstack.org/ | sh && \
+    stack --system-ghc --resolver lts-8.0 setup
+RUN stack config set system-ghc --global true && \
+    stack config set resolver lts-8.0
+ENV APP_HOME /app
+RUN mkdir -p $APP_HOME
+WORKDIR $APP_HOME
