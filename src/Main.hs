@@ -19,7 +19,11 @@ helloApp :: Application
 helloApp req respond = do
   putStrLn $ show req
   respond $
-    responseLBS status200 [("Content-Type", "text/html;charset=utf-8")] "<html><body>Hello Wai</body></html>"
+    responseLBS status200
+    [ ("Content-Type", "text/html;charset=utf-8")
+    , ("X-Content-Type-Options", "nosniff")
+    ]
+    "<html><body>Hello Wai</body></html>"
 
 buildResponse :: Request -> IO Builder
 buildResponse req = do
