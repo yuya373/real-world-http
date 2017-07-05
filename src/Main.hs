@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Main where
 
+import System.IO
 import Network.Wai (responseBuilder, responseLBS, Application, requestBody, Request)
 import Network.HTTP.Types (status200)
 import Network.Wai.Handler.Warp (run, Port)
@@ -11,13 +12,12 @@ import Blaze.ByteString.Builder
 main :: IO ()
 main = do
   port <- getPort
-  putStr "Server Started http://localhost:"
-  print port
+  hPutStrLn stderr $ "Server Started http://localhost:" ++ (show port)
   run port helloApp
 
 helloApp :: Application
 helloApp req respond = do
-  putStrLn $ show req
+  hPutStrLn stderr $ show req
   respond $
     responseLBS status200
     [ ("Content-Type", "text/html;charset=utf-8")
