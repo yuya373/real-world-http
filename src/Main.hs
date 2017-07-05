@@ -32,4 +32,4 @@ getPort = do
   return $ fromMaybe defaultPort $ fmap read (lookup "PORT" env)
 
 defaultPort :: Port
-defaultPort = 3000
+defaultPort = 18888
