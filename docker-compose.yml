@@ -9,3 +9,6 @@ services:
     command: stack exec real-world-http
     volumes:
       - .:/app
+      - stack-data:/root/.stack
+volumes:
+  stack-data:
